@@ -6,18 +6,22 @@ const loadNewsCategory = async() =>{
     displayCategory(data.data.news_category);
 }
 
+// const categoryName = 
 const displayCategory = categories =>{
-    // console.log(categories);
+    console.log(categories);
    const menuCategory = document.getElementById('all-category')
     
     for(const category of categories ){
-        // console.log(category.category_id);
+        console.log(category.category_id);
         const li = document.createElement('li');
         li.innerHTML = `
         <a onclick='loadNewsDetails("${category.category_id}")' class="nav-link" href="#">${category.category_name}</a>
         `
         menuCategory.appendChild(li);
+        toggleSpinner(true);
+        
     }
+    
 }
 // ------------------------------***************
 
@@ -32,7 +36,7 @@ const loadNewsDetails = async(id) =>{
 
 const displayNews = news =>{
   console.log(news);
-  // toggleSpinner(true);
+  
     const newsContainer = document.getElementById('news-Container');
     newsContainer.textContent = '';
 
@@ -48,10 +52,10 @@ const displayNews = news =>{
     
     // count category news
     const countNews = document.getElementById('count_news');
-    countNews.innerText = `${news.length} items found for category`;
+    countNews.innerText = `${news.length} items found for this category`;
 
     news.forEach(singleNews =>{
-        // console.log(singleNews);
+        console.log(singleNews);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('row');
         newsDiv.innerHTML = `
@@ -98,8 +102,11 @@ const displayNews = news =>{
         toggleSpinner(false);
     })
    
-   
+    // loadNewsDetails('02');
 }
+
+
+
 
 const showModal = async(id) =>{
   const url = `https://openapi.programming-hero.com/api/news/${id}`
@@ -147,10 +154,13 @@ const toggleSpinner = isLoading => {
   if(isLoading){
     loaderItem.classList.remove('d-none');
   }
+  else{
+    loaderItem.classList.add('d-none');
+  }
 }
 
 loadNewsCategory();
-loadNewsDetails();
+loadNewsDetails('01');
 
 
 
