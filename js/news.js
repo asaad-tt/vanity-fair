@@ -10,7 +10,7 @@ const displayCategory = categories =>{
     // console.log(categories);
     const menuCategory = document.getElementById('all-category')
     for(const category of categories ){
-        console.log(category.category_id);
+        // console.log(category.category_id);
         const li = document.createElement('li');
         li.innerHTML = `
         <a onclick='loadNewsDetails("${category.category_id}")' class="nav-link" href="#">${category.category_name}</a>
@@ -33,12 +33,13 @@ const loadNewsDetails = async(id) =>{
 }
 
 const displayNews = news =>{
-  console.log(news);
+  // console.log(news);
     const newsContainer = document.getElementById('news-Container');
     newsContainer.textContent = '';
     
     news.forEach(singleNews =>{
-        console.log(singleNews);
+     
+        // console.log(singleNews);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('row');
         newsDiv.innerHTML = `
@@ -70,7 +71,9 @@ const displayNews = news =>{
                   <span>${singleNews.total_view ? singleNews.total_view : "no views"}</span>
                </div>
                <div class="col-md-4">
-                  <button class="btn btn-success">Show Details</button>
+                    <button onclick="showModal('${singleNews._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal">
+                    Show Detail
+                    </button>
                </div>
 
               </div>
@@ -81,7 +84,50 @@ const displayNews = news =>{
         `
         newsContainer.appendChild(newsDiv);
     })
+   
+   
 }
+
+const showModal = async(id) =>{
+  const url = `https://openapi.programming-hero.com/api/news/${id}`
+    const res = await fetch(url);
+    const data = await res.json();
+  //  console.log(data.data.news_category[0].category_id);
+  displayModal (data.data);
+}
+
+const displayModal = modals =>{
+    // console.log(modals);
+    const modalContainer = document.getElementById('modal_container')
+    modals.forEach(modal =>{
+      console.log(modal);
+    const modalTitle = document.getElementById('newsDetailModalLabel')
+    modalTitle.innerText = modal.title;
+    const modalImage = document.getElementById('modal_image')
+    modalImage.innerHTML = `
+    <img class="img-fluid" src="${modal.image_url}" alt="">
+    `
+    const modalDescription = document.getElementById('modal_description');
+    modalDescription.innerHTML = modal.details;
+    const modalAuthor = document.getElementById('author_detail')
+    modalAuthor.innerHTML = `
+    <div class="col-md-4">
+       <img class="img-fluid" src="${modal.author.img}" alt="">
+    </div>
+    <div class="col-md-4">
+      <p class="author_name">${modal.author.name ? modal.author.name : 'name not found' }</p>
+      <p class="lh-1">${modal.author.published_date ? modal.author.published_date : 'date not found'}</p>
+    </div>
+    <div class="col-md-4">
+      <span><i class="fa-solid fa-eye"></i></span>
+      <span>${modal.total_view ? modal.total_view : "no data found"}</span>
+    </div>
+    `
+     
+    })
+    
+}
+
 
 loadNewsCategory();
 loadNewsDetails();
