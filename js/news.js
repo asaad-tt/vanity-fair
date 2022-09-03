@@ -8,7 +8,8 @@ const loadNewsCategory = async() =>{
 
 const displayCategory = categories =>{
     // console.log(categories);
-    const menuCategory = document.getElementById('all-category')
+   const menuCategory = document.getElementById('all-category')
+    
     for(const category of categories ){
         // console.log(category.category_id);
         const li = document.createElement('li');
@@ -16,8 +17,6 @@ const displayCategory = categories =>{
         <a onclick='loadNewsDetails("${category.category_id}")' class="nav-link" href="#">${category.category_name}</a>
         `
         menuCategory.appendChild(li);
-        
-
     }
 }
 // ------------------------------***************
@@ -27,18 +26,31 @@ const loadNewsDetails = async(id) =>{
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
     const res = await fetch(url);
     const data = await res.json();
-  //  console.log(data.data.news_category[0].category_id);
-  displayNews(data.data);
-
+    displayNews(data.data);
 }
 
+
 const displayNews = news =>{
-  // console.log(news);
+  console.log(news);
+  // toggleSpinner(true);
     const newsContainer = document.getElementById('news-Container');
     newsContainer.textContent = '';
+
+    // no found message show 
+    const noNewsFound = document.getElementById('no_news');
+    if(news.length === 0){
+      noNewsFound.classList.remove('d-none');
+      // noNewsFound.textContent ="";
+    }
+    else{
+      noNewsFound.classList.add('d-none');
+    }
     
+    // count category news
+    const countNews = document.getElementById('count_news');
+    countNews.innerText = `${news.length} items found for category`;
+
     news.forEach(singleNews =>{
-     
         // console.log(singleNews);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('row');
@@ -83,6 +95,7 @@ const displayNews = news =>{
       </div>
         `
         newsContainer.appendChild(newsDiv);
+        toggleSpinner(false);
     })
    
    
@@ -100,7 +113,7 @@ const displayModal = modals =>{
     // console.log(modals);
     const modalContainer = document.getElementById('modal_container')
     modals.forEach(modal =>{
-      console.log(modal);
+      // console.log(modal);
     const modalTitle = document.getElementById('newsDetailModalLabel')
     modalTitle.innerText = modal.title;
     const modalImage = document.getElementById('modal_image')
@@ -128,6 +141,13 @@ const displayModal = modals =>{
     
 }
 
+
+const toggleSpinner = isLoading => {
+  const loaderItem = document.getElementById('loader');
+  if(isLoading){
+    loaderItem.classList.remove('d-none');
+  }
+}
 
 loadNewsCategory();
 loadNewsDetails();
