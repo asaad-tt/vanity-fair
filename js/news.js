@@ -1,3 +1,4 @@
+// api call and category display ----------------
 const loadNewsCategory = async() =>{
     const url = `https://openapi.programming-hero.com/api/news/categories`
     const res = await fetch(url);
@@ -6,10 +7,85 @@ const loadNewsCategory = async() =>{
 }
 
 const displayCategory = categories =>{
-    // console.log(category);
+    // console.log(categories);
+    const menuCategory = document.getElementById('all-category')
     for(const category of categories ){
-        console.log(category.category_name);
+        console.log(category.category_id);
+        const li = document.createElement('li');
+        li.innerHTML = `
+        <a onclick='loadNewsDetails("${category.category_id}")' class="nav-link" href="#">${category.category_name}</a>
+        `
+        menuCategory.appendChild(li);
+        
+
     }
+}
+// ------------------------------***************
+
+// load news data (category wise show korar jonno) ----
+const loadNewsDetails = async(id) =>{
+    const url = `https://openapi.programming-hero.com/api/news/category/${id}`
+    const res = await fetch(url);
+    const data = await res.json();
+  //  console.log(data.data.news_category[0].category_id);
+  displayNews(data.data);
+
+}
+
+const displayNews = news =>{
+  console.log(news);
+    const newsContainer = document.getElementById('news-Container');
+    newsContainer.textContent = '';
+    
+    news.forEach(singleNews =>{
+        console.log(singleNews);
+        const newsDiv = document.createElement('div');
+        newsDiv.classList.add('row');
+        newsDiv.innerHTML = `
+        <div class="card mb-3 p-3" style="width: 100%;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="${singleNews.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">${singleNews.title}</h5>
+              <p class="card-text">${singleNews.details.length > 400? singleNews.details.slice(0, 400) + '...' : singleNews.details }</p>
+        
+              <div class="row">
+
+                <div class="col-md-4">
+                  <div class="row">
+                     <div class="col-md-4">
+                        <img class="img-fluid" src="${singleNews.author.img}" alt="">
+                      </div>
+                     <div class="col-md-8">
+                       <p class="author_name">${singleNews.author.name ? singleNews.author.name : 'name not found' }</p>
+                       <p class="lh-1">${singleNews.author.published_date ? singleNews.author.published_date : 'date not found'}</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <span><i class="fa-solid fa-eye"></i></span>
+                  <span>${singleNews.total_view ? singleNews.total_view : "no views"}</span>
+               </div>
+               <div class="col-md-4">
+                  <button class="btn btn-success">Show Details</button>
+               </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        `
+        newsContainer.appendChild(newsDiv);
+    })
 }
 
 loadNewsCategory();
+loadNewsDetails();
+
+
+
+
