@@ -17,9 +17,7 @@ const displayCategory = categories =>{
         li.innerHTML = `
         <a onclick='loadNewsDetails("${category.category_id}")' class="nav-link" href="#">${category.category_name}</a>
         `
-        menuCategory.appendChild(li);
-        
-        
+        menuCategory.appendChild(li);   
     }
     
 }
@@ -36,8 +34,7 @@ const loadNewsDetails = async(id) =>{
 
 
 const displayNews = news =>{
-  // console.log(news);
-     
+  // console.log(news); 
     const newsContainer = document.getElementById('news-Container');
     newsContainer.textContent = '';
 
@@ -45,21 +42,18 @@ const displayNews = news =>{
     const noNewsFound = document.getElementById('no_news');
     if(news.length === 0){
       noNewsFound.classList.remove('d-none');
-      // noNewsFound.textContent ="";
     }
     else{
       noNewsFound.classList.add('d-none');
     }
     toggleSpinner(false);
+
     // count category news
     const countNews = document.getElementById('count_news');
     countNews.innerText = `${news.length} items found for this category`;
 
     news.forEach(singleNews =>{
         // console.log(singleNews);
-     
-
-
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('row');
         newsDiv.innerHTML = `
@@ -74,7 +68,6 @@ const displayNews = news =>{
               <p class="card-text">${singleNews.details.length > 400? singleNews.details.slice(0, 400) + '...' : singleNews.details }</p>
         
               <div class="row">
-
                 <div class="col-md-4">
                   <div class="row">
                      <div class="col-md-4">
@@ -105,18 +98,14 @@ const displayNews = news =>{
         newsContainer.appendChild(newsDiv);
         toggleSpinner(false);
     })
-   
-    
+       
 }
 
-
-
-
+// modal section 
 const showModal = async(id) =>{
   const url = `https://openapi.programming-hero.com/api/news/${id}`
     const res = await fetch(url);
     const data = await res.json();
-  //  console.log(data.data.news_category[0].category_id);
   displayModal (data.data);
 }
 
@@ -151,8 +140,7 @@ const displayModal = modals =>{
     })
     
 }
-
-
+// spinner 
 const toggleSpinner = isLoading => {
   const loaderItem = document.getElementById('loader');
   if(isLoading){
