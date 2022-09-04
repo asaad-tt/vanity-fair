@@ -8,11 +8,11 @@ const loadNewsCategory = async() =>{
 
 // const categoryName = 
 const displayCategory = categories =>{
-    console.log(categories);
+    // console.log(categories);
    const menuCategory = document.getElementById('all-category')
     
     for(const category of categories ){
-        console.log(category.category_id);
+        // console.log(category.category_id);
         const li = document.createElement('li');
         li.innerHTML = `
         <a onclick='loadNewsDetails("${category.category_id}")' class="nav-link" href="#">${category.category_name}</a>
@@ -37,12 +37,7 @@ const loadNewsDetails = async(id) =>{
 
 const displayNews = news =>{
   // console.log(news);
-      // const shortItem = news;
-      // news.short((a, b) =>{
-      //   return b.total_view - a.total_view
-      // })
-      // console.log(shortItem);
-  
+     
     const newsContainer = document.getElementById('news-Container');
     newsContainer.textContent = '';
 
@@ -61,7 +56,7 @@ const displayNews = news =>{
     countNews.innerText = `${news.length} items found for this category`;
 
     news.forEach(singleNews =>{
-        console.log(singleNews);
+        // console.log(singleNews);
      
 
 
