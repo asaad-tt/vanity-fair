@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #F7F6DC;
+}
+.logo {
+    color: #F94892;
+    font-family: 'Aclonica', sans-serif;
+}
+
+@media screen and (max-width: 768px){
+    .card_img{
+        width: 100%;
+    }
+    .autor_img{
+        width: 60px;
+        height: 60px;
+    }
+    .date{
+        color: red;
+    }
+}

@@ -18,7 +18,7 @@ const displayCategory = categories =>{
         <a onclick='loadNewsDetails("${category.category_id}")' class="nav-link" href="#">${category.category_name}</a>
         `
         menuCategory.appendChild(li);
-        toggleSpinner(true);
+        
         
     }
     
@@ -27,6 +27,7 @@ const displayCategory = categories =>{
 
 // load news data (category wise show korar jonno) ----
 const loadNewsDetails = async(id) =>{
+     toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
     const res = await fetch(url);
     const data = await res.json();
@@ -35,7 +36,12 @@ const loadNewsDetails = async(id) =>{
 
 
 const displayNews = news =>{
-  console.log(news);
+  // console.log(news);
+      // const shortItem = news;
+      // news.short((a, b) =>{
+      //   return b.total_view - a.total_view
+      // })
+      // console.log(shortItem);
   
     const newsContainer = document.getElementById('news-Container');
     newsContainer.textContent = '';
@@ -49,22 +55,25 @@ const displayNews = news =>{
     else{
       noNewsFound.classList.add('d-none');
     }
-    
+    toggleSpinner(false);
     // count category news
     const countNews = document.getElementById('count_news');
     countNews.innerText = `${news.length} items found for this category`;
 
     news.forEach(singleNews =>{
         console.log(singleNews);
+     
+
+
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('row');
         newsDiv.innerHTML = `
         <div class="card mb-3 p-3" style="width: 100%;">
         <div class="row g-0">
-          <div class="col-md-4">
-            <img src="${singleNews.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+          <div class="col-lg-4 col-md-4">
+            <img src="${singleNews.thumbnail_url}" class="card_img img-fluid rounded-start" alt="...">
           </div>
-          <div class="col-md-8">
+          <div class="col-lg-8 col-md-8">
             <div class="card-body">
               <h5 class="card-title">${singleNews.title}</h5>
               <p class="card-text">${singleNews.details.length > 400? singleNews.details.slice(0, 400) + '...' : singleNews.details }</p>
@@ -74,11 +83,11 @@ const displayNews = news =>{
                 <div class="col-md-4">
                   <div class="row">
                      <div class="col-md-4">
-                        <img class="img-fluid" src="${singleNews.author.img}" alt="">
+                        <img class="autor_img img-fluid"  src="${singleNews.author.img}" alt="">
                       </div>
                      <div class="col-md-8">
                        <p class="author_name">${singleNews.author.name ? singleNews.author.name : 'name not found' }</p>
-                       <p class="lh-1">${singleNews.author.published_date ? singleNews.author.published_date : 'date not found'}</p>
+                       <p class="date lh-1">${singleNews.author.published_date ? singleNews.author.published_date : 'date not found'}</p>
                      </div>
                   </div>
                </div>
@@ -102,7 +111,7 @@ const displayNews = news =>{
         toggleSpinner(false);
     })
    
-    // loadNewsDetails('02');
+    
 }
 
 
