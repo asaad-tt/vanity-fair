@@ -7,46 +7,76 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Question and Answere</h1>
+    <section class="container">
+        <h1 class="mt-5">Question and Answere</h1>
 
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Accordion Item #1
+          <h2 class=" accordion-header" id="headingOne">
+            <button class="fw-bold accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+             what is the Difference between Var, Let and Const ?
             </button>
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <p>
+                    1. var is a function scoped / global scoped variable but Let is block scoped. <br>
+                    2. we can redeclare and reassigned var but we can not  re-declared Let but can be re-assigned. <br>
+                    3. Const is quite similar like Let . But const variables cannot be re-assigned or re-declared
+                </p>
             </div>
           </div>
         </div>
         <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Accordion Item #2
+          <h2 class=" accordion-header" id="headingTwo">
+            <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+             What is the  Difference between normal function and arrow function ?
             </button>
           </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          <div id="collapseTwo" class=" accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                1. In regular JavaScript functions, arguments keywords can be used to access the passed arguments when the function is invoked. <br>
+                But, arrow functions do not have their own arguments and it uses the arguments from the outer function. <br>
+
+                2.  we can easily construct objects with regular functions.
+                but arrow functions can not be used as constructors. <br>
+                3. In regular functions, we can use the return keyword to return any value from a function. If we don't return anything, the function will implicitly return undefined. <br>
+                If the arrow function contains one expression, you can omit the curly braces, and then the expression will be implicitly returned.
             </div>
           </div>
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Accordion Item #3
+            <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            What is the Difference between map, foreach, filter and find?
             </button>
           </h2>
           <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                1. .map() when we want to transform elements in an array we can use map. <br>
+                2. forEach just loop over the array and executes the callback but its not return the value . <br>
+                3. .filter() when we want to select a subset of multiple elements from an array we can use filter. filter executes the callback and check its return value <br>
+                4. .find() When we want to select a single element from an array we can use find.
             </div>
           </div>
         </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Why we use template string .
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                Template strings are a powerful feature of modern JavaScript released in ES6. It lets us insert/interpolate variables and expressions into strings without needing to concatenate like in older versions of JavaScript. It allows us to create strings that are complex and contain dynamic elements. Another great thing that comes with template strings are tags. Tags are functions that take a string and the decomposed parts of the string as parameters and are great for converting strings to different entities. <br>
+                we can use value dynamicaly through it. We insert a variable or expression by adding a dollar sign $ and curly braces {} into the string `${variable}`. <br>
+                Another great feature of template strings is that we can have strings with multiple lines for better code readability. This cannot be done in an easy way with the old style of strings. With the old style of strings, we had to concatenate each line of the string to put long strings in multiple lines
+              </div>
+            </div>
+          </div>
       </div>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </body>
